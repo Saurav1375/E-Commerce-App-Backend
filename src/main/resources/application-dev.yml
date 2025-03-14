@@ -1,12 +1,12 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/auth_db
+    url: jdbc:postgresql://localhost:5432/ecommerce_db
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: false
 
     properties:
@@ -40,5 +40,5 @@ application:
     frontend:
       activation-url: http://localhost:4200/activate-account
 server:
-  port: 8050
+  port: 8010
 
