@@ -1,9 +1,11 @@
 package org.example.ecommerce.service;
 
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.ecommerce.enums.ProductCategory;
 import org.example.ecommerce.model.Product;
+import org.example.ecommerce.repository.CartItemRepository;
 import org.example.ecommerce.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepository productRepository;
+    private final CartItemRepository cartItemRepository;
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();
@@ -80,4 +83,19 @@ public class ProductService {
             throw new RuntimeException("Invalid name: " + name);
         }
     }
+
+    @Transactional
+    public boolean deleteProductById(Integer id) {
+        try {
+            Product product = productRepository.findById(id).orElse(null);
+            cartItemRepository.deleteByProduct(product); // Delete all cart items linked to the product
+            productRepository.deleteById(id); // Now safely delete the product
+            return true;
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Invalid id: " + id);
+        } catch (Exception e) {
+            throw new RuntimeException("Error deleting product with id: " + id, e);
+        }
+    }
+
 }

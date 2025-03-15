@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -30,7 +31,7 @@ public class CartController {
             Cart userCart = cartService.getUserCart(username);
             List<CartItem> cartItems = cartItemService.getAllCartItems(userCart);
             if (cartItems.isEmpty()) {
-                return ResponseEntity.noContent().build();
+                return new ResponseEntity<>(cartItems, HttpStatus.NO_CONTENT);
             }
             return ResponseEntity.ok(cartItems);
         } catch (Exception e) {

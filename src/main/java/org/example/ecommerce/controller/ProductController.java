@@ -62,6 +62,20 @@ public class ProductController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteProduct(@PathVariable Integer id) {
+        try {
+           var deleted = productService.deleteProductById(id);
+            if (deleted) {
+                return new ResponseEntity<>("Product deleted", HttpStatus.OK);
+            }
+            return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
+
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @GetMapping("/category/{category}")
     public ResponseEntity<?> getProductsByCategory(@PathVariable String category) {
         try {

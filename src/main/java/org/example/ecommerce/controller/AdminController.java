@@ -2,13 +2,14 @@ package org.example.ecommerce.controller;
 
 
 import lombok.RequiredArgsConstructor;
+import org.example.ecommerce.model.Order;
+import org.example.ecommerce.model.OrderStatusUpdateRequest;
 import org.example.ecommerce.model.User;
+import org.example.ecommerce.service.OrderService;
 import org.example.ecommerce.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,6 +18,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AdminController {
     private final UserService userService;
+    private final OrderService orderService;
+
     @GetMapping("/users")
     public ResponseEntity<?> getAllUsers() {
         List<User> users = userService.getAllUsers();
@@ -24,5 +27,26 @@ public class AdminController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(users);
+    }
+
+    @GetMapping("/orders")
+    public ResponseEntity<List<Order>> getAllOrders() {
+        List<Order> orders = orderService.getAllOrders();
+        if (orders.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(orders);
+    }
+
+    @PutMapping("orders/{orderId}/status")
+    public ResponseEntity<?> updateOrderStatus(@PathVariable Integer orderId, @RequestBody OrderStatusUpdateRequest request) {
+        try {
+            Order updatedOrder = orderService.updateOrderStatus(orderId, request.getStatus());
+            return ResponseEntity.ok(updatedOrder);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("An error occurred while updating order status.");
+        }
     }
 }
