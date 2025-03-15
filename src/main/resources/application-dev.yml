@@ -35,6 +35,8 @@ application:
     jwt:
       secret-key: ${SECRET_KEY}
       expiration: 86400000
+      refresh-token:
+        expiration: 604800000 #7 day
 
   mailing:
     frontend:

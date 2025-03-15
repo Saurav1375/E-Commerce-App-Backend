@@ -1,7 +1,10 @@
 package org.example.ecommerce.service;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.example.ecommerce.model.auth.AuthenticationRequest;
 import org.example.ecommerce.model.auth.AuthenticationResponse;
@@ -18,11 +21,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 @Service
 @RequiredArgsConstructor
@@ -113,12 +119,13 @@ public class AuthenticationService {
         var user = (User) auth.getPrincipal();
         claims.put("fullName", user.getFullName());
         var jwtToken = jwtService.generateToken(claims, user);
-        return AuthenticationResponse.builder().token(jwtToken).build();
-
-
+        var refreshToken = jwtService.generateRefreshToken(claims, user);
+        return AuthenticationResponse.builder()
+                .accessToken(jwtToken)
+                .refreshToken(refreshToken)
+                .build();
     }
 
-//    @Transactional
     public void activateToken(String token) throws MessagingException {
         Token savedToken = tokenRepository.findByToken(token).orElseThrow(
                 () -> new RuntimeException("Token does not exist")
@@ -134,5 +141,33 @@ public class AuthenticationService {
         userRepository.save(user);
         savedToken.setValidatedAt(LocalDateTime.now());
         tokenRepository.save(savedToken);
+    }
+
+
+    public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        final String authHeader = request.getHeader(AUTHORIZATION);
+        final String refreshToken;
+        final String userEmail;
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return;
+        }
+        refreshToken = authHeader.substring(7);
+        userEmail = jwtService.extractUsername(refreshToken);
+        if (userEmail != null ) {
+            var user = userRepository.findByEmail(userEmail).orElseThrow(
+                    () -> new UsernameNotFoundException("User not found")
+            );
+            if (jwtService.isTokenValid(refreshToken, user)) {
+                var claims = new HashMap<String, Object>();
+                claims.put("fullName", user.getFullName());
+                var jwtToken = jwtService.generateToken(claims, user);
+                var authResponse = AuthenticationResponse.builder()
+                        .accessToken(jwtToken)
+                        .refreshToken(refreshToken)
+                        .build();
+
+                new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
+            }
+        }
     }
 }
