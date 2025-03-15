@@ -2,7 +2,7 @@ package org.example.ecommerce.mappers;
 
 
 import org.example.ecommerce.dto.UserDto;
-import org.example.ecommerce.model.User;
+import org.example.ecommerce.model.user.User;
 import org.springframework.stereotype.Service;
 
 @Service

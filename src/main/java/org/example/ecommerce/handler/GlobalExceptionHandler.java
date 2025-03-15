@@ -2,7 +2,7 @@ package org.example.ecommerce.handler;
 
 
 import jakarta.mail.MessagingException;
-import org.example.ecommerce.model.ExceptionResponse;
+import org.example.ecommerce.model.exception.ExceptionResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;

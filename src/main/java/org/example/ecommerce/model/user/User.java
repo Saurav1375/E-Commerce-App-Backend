@@ -1,8 +1,10 @@
-package org.example.ecommerce.model;
+package org.example.ecommerce.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.ecommerce.model.cart.Cart;
+import org.example.ecommerce.model.order.Order;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;

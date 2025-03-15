@@ -2,13 +2,12 @@ package org.example.ecommerce.controller;
 
 
 import lombok.RequiredArgsConstructor;
-import org.example.ecommerce.model.Order;
-import org.example.ecommerce.model.OrderStatusUpdateRequest;
-import org.example.ecommerce.model.User;
+import org.example.ecommerce.model.order.Order;
+import org.example.ecommerce.model.order.OrderStatusUpdateRequest;
+import org.example.ecommerce.model.user.User;
 import org.example.ecommerce.service.OrderService;
 import org.example.ecommerce.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -2,7 +2,6 @@ package org.example.ecommerce.config;
 
 import lombok.RequiredArgsConstructor;
 import org.example.ecommerce.filter.JwtFilter;
-import org.example.ecommerce.model.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

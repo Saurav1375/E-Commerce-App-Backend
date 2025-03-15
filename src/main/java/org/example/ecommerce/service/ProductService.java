@@ -4,7 +4,7 @@ package org.example.ecommerce.service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.ecommerce.enums.ProductCategory;
-import org.example.ecommerce.model.Product;
+import org.example.ecommerce.model.product.Product;
 import org.example.ecommerce.repository.CartItemRepository;
 import org.example.ecommerce.repository.ProductRepository;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package org.example.ecommerce.model;
+package org.example.ecommerce.model.exception;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

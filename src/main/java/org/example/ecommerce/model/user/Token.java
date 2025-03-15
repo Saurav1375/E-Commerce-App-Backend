@@ -1,4 +1,4 @@
-package org.example.ecommerce.model;
+package org.example.ecommerce.model.user;
 
 
 import jakarta.persistence.*;

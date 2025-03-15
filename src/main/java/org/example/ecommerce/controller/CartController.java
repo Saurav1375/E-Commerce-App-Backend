@@ -2,9 +2,9 @@ package org.example.ecommerce.controller;
 
 
 import lombok.AllArgsConstructor;
-import org.example.ecommerce.model.Cart;
-import org.example.ecommerce.model.CartItem;
-import org.example.ecommerce.model.CartRequest;
+import org.example.ecommerce.model.cart.Cart;
+import org.example.ecommerce.model.cart.CartItem;
+import org.example.ecommerce.model.cart.CartRequest;
 import org.example.ecommerce.service.CartItemService;
 import org.example.ecommerce.service.CartService;
 import org.springframework.http.HttpStatus;
@@ -13,7 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

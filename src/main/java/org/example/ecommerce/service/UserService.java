@@ -2,7 +2,7 @@ package org.example.ecommerce.service;
 import lombok.RequiredArgsConstructor;
 import org.example.ecommerce.dto.UserDto;
 import org.example.ecommerce.mappers.UserMapper;
-import org.example.ecommerce.model.User;
+import org.example.ecommerce.model.user.User;
 import org.example.ecommerce.repository.UserRepository;
 import org.springframework.stereotype.Service;
 

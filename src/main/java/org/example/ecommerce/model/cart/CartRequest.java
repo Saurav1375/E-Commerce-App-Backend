@@ -1,4 +1,4 @@
-package org.example.ecommerce.model;
+package org.example.ecommerce.model.cart;
 
 
 import lombok.Builder;

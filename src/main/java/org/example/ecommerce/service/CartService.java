@@ -2,12 +2,11 @@ package org.example.ecommerce.service;
 
 
 import jakarta.transaction.Transactional;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.example.ecommerce.model.Cart;
-import org.example.ecommerce.model.CartItem;
-import org.example.ecommerce.model.Product;
-import org.example.ecommerce.model.User;
+import org.example.ecommerce.model.cart.Cart;
+import org.example.ecommerce.model.cart.CartItem;
+import org.example.ecommerce.model.product.Product;
+import org.example.ecommerce.model.user.User;
 import org.example.ecommerce.repository.CartItemRepository;
 import org.example.ecommerce.repository.CartRepository;
 import org.example.ecommerce.repository.ProductRepository;

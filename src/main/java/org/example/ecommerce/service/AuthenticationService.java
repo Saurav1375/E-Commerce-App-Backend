@@ -3,7 +3,11 @@ package org.example.ecommerce.service;
 
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
-import org.example.ecommerce.model.*;
+import org.example.ecommerce.model.auth.AuthenticationRequest;
+import org.example.ecommerce.model.auth.AuthenticationResponse;
+import org.example.ecommerce.model.auth.RegistrationRequest;
+import org.example.ecommerce.model.user.Token;
+import org.example.ecommerce.model.user.User;
 import org.example.ecommerce.repository.RoleRepository;
 import org.example.ecommerce.repository.TokenRepository;
 import org.example.ecommerce.repository.UserRepository;

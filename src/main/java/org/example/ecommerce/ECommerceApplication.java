@@ -1,8 +1,6 @@
 package org.example.ecommerce;
 
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.info.Info;
-import org.example.ecommerce.model.Role;
+import org.example.ecommerce.model.user.Role;
 import org.example.ecommerce.repository.RoleRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

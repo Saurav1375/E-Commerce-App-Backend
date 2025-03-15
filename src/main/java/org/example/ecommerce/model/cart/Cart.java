@@ -1,8 +1,9 @@
-package org.example.ecommerce.model;
+package org.example.ecommerce.model.cart;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.ecommerce.model.user.User;
 
 import java.util.ArrayList;
 import java.util.List;

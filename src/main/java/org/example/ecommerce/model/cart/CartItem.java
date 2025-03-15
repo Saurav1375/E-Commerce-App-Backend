@@ -1,8 +1,9 @@
-package org.example.ecommerce.model;
+package org.example.ecommerce.model.cart;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.ecommerce.model.product.Product;
 
 @Entity
 @Table(name = "cart_items")
