@@ -52,8 +52,6 @@ public class AuthenticationService {
                 () -> new IllegalStateException("ROLE ADMIN was not initialized")
         );
 
-
-
         var user = User.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
@@ -127,6 +125,7 @@ public class AuthenticationService {
     }
 
     public void activateToken(String token) throws MessagingException {
+
         Token savedToken = tokenRepository.findByToken(token).orElseThrow(
                 () -> new RuntimeException("Token does not exist")
         );
@@ -137,10 +136,15 @@ public class AuthenticationService {
         var user = userRepository.findById(savedToken.getUser().getId()).orElseThrow(
                 () -> new UsernameNotFoundException("User not found")
         );
-        user.setEnabled(true);
-        userRepository.save(user);
-        savedToken.setValidatedAt(LocalDateTime.now());
-        tokenRepository.save(savedToken);
+        if (!user.isEnabled()) {
+            user.setEnabled(true);
+            userRepository.save(user);
+            savedToken.setValidatedAt(LocalDateTime.now());
+            tokenRepository.save(savedToken);
+            return;
+        }
+        throw new RuntimeException("Account is already Activated");
+
     }
 
 

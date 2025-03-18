@@ -3,13 +3,18 @@ package org.example.ecommerce.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.example.ecommerce.dto.CategoryDto;
 import org.example.ecommerce.enums.ProductCategory;
 import org.example.ecommerce.model.product.Product;
 import org.example.ecommerce.repository.CartItemRepository;
 import org.example.ecommerce.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -98,4 +103,9 @@ public class ProductService {
         }
     }
 
+    public List<CategoryDto> getAllCategories() {
+        return  Arrays.stream(ProductCategory.values())
+                .map(category -> new CategoryDto(category.getId(), category.name()))
+                .collect(Collectors.toList());
+    }
 }

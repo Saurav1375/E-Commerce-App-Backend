@@ -7,7 +7,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: false
+    show-sql: true
+
 
     properties:
       hibernate:
@@ -43,4 +44,5 @@ application:
       activation-url: http://localhost:4200/activate-account
 server:
   port: 8010
+  address: 0.0.0.0
 

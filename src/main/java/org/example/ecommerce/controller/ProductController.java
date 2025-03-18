@@ -2,6 +2,7 @@ package org.example.ecommerce.controller;
 
 
 import lombok.RequiredArgsConstructor;
+import org.example.ecommerce.dto.CategoryDto;
 import org.example.ecommerce.model.product.Product;
 import org.example.ecommerce.service.ProductService;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("products")
@@ -79,9 +81,6 @@ public class ProductController {
     public ResponseEntity<?> getProductsByCategory(@PathVariable String category) {
         try {
             List<Product> products = productService.getProductsByCategory(category);
-            if (products.isEmpty()) {
-                return new ResponseEntity<>(List.of(), HttpStatus.NOT_FOUND);
-            }
             return ResponseEntity.ok(products);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -97,6 +96,20 @@ public class ProductController {
                 return new ResponseEntity<>(List.of(), HttpStatus.NOT_FOUND);
             }
             return ResponseEntity.ok(products);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/categories")
+    public ResponseEntity<?> getAllCategories() {
+        try {
+            List<CategoryDto> categories = productService.getAllCategories();
+            if (categories.isEmpty()) {
+                return new ResponseEntity<>(List.of(), HttpStatus.NOT_FOUND);
+            }
+            return ResponseEntity.ok(categories);
+
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
