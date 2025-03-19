@@ -1,7 +1,6 @@
 package org.example.ecommerce.controller;
 
 
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,7 +19,6 @@ import java.io.IOException;
 @RestController
 @RequestMapping("auth")
 @RequiredArgsConstructor
-@Tag(name = "authentication")
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
 

@@ -21,7 +21,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 @RequiredArgsConstructor
 @EnableMethodSecurity(securedEnabled = true) //for role based auth
-public class SecurityConfig extends WebSecurityConfiguration {
+public class SecurityConfig {
 
     private final AuthenticationProvider authenticationProvider;
     private final JwtFilter jwtAuthFilter;
